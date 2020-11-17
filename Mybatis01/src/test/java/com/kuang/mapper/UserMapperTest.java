@@ -115,4 +115,33 @@ public class UserMapperTest {
         sqlSession.commit();
         sqlSession.close();
     }
+
+    @Test
+    public void addUserMap() {
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        final Map<String, Object> map = new HashMap<String, Object>();
+        map.put("id", 5);
+        map.put("username", "刁秀泽");
+
+        final int i = userMapper.addUserMap(map);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    // 模糊查询用户信息
+    @Test
+    public void selectUserLike() {
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        // final List<User> userList = userMapper.selectUserLike("%刁%");
+
+        final List<User> userList = userMapper.selectUserLike("秀");
+        for (User user : userList) {
+            System.out.println(user);
+        }
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
 }

@@ -33,4 +33,13 @@
     <delete id="deleteUser" parameterType="int">
         delete from user where id = #{id}
     </delete>
+
+    <insert id="addUserMap" parameterType="map">
+        insert into user(id,name) values (#{id}, #{username})
+    </insert>
+
+    <select id="selectUserLike" resultType="com.kuang.pojo.User">
+        <!--select * from user where name like #{username}-->
+        select * from user where name like "%"#{username}"%"
+    </select>
 </mapper>

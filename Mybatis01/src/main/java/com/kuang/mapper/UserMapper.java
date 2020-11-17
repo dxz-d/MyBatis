@@ -58,6 +58,15 @@ public interface UserMapper {
     int addUser(User user);
 
     /**
+     * 给数据库增加一个用户给数据库增加一个用户
+     * map传值
+     *
+     * @param map
+     * @return
+     */
+    int addUserMap(Map<String, Object> map);
+
+    /**
      * 修改用户信息
      *
      * @param user
@@ -72,4 +81,12 @@ public interface UserMapper {
      * @return
      */
     int deleteUser(int id);
+
+    /**
+     * 模糊查询
+     *
+     * @param username
+     * @return
+     */
+    List<User> selectUserLike(String username);
 }
