@@ -3,6 +3,7 @@ package com.kuang.mapper;
 import com.kuang.pojo.User;
 import com.kuang.utils.MybatisUntils;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -13,6 +14,15 @@ import java.util.Map;
  * 测试类
  */
 public class UserMapperTest {
+
+    static Logger logger = Logger.getLogger(String.valueOf(UserMapperTest.class));
+
+    @Test
+    public void log4j() {
+        logger.info("进入selectUser方法");
+        logger.debug("debug：进入selectUser方法");
+        logger.error("error: 进入selectUser方法");
+    }
 
     // 1.查询用户
     @Test
@@ -36,18 +46,6 @@ public class UserMapperTest {
         sqlSession.close();
     }
 
-    // 2.根据id查询用户
-    @Test
-    public void selectUserById() {
-        // 获取sqlSession连接
-        final SqlSession sqlSession = MybatisUntils.getSession();
-        final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        final User user = userMapper.selectUserById(1);
-
-        System.out.println(user);
-
-        sqlSession.close();
-    }
 
     // 通过密码和名字查询用户(方式一：通过参数传递)
     @Test
@@ -87,31 +85,6 @@ public class UserMapperTest {
         System.out.println("给数据库增加一个用户:" + i);
 
         // 提交事务，重点！不写的话不会提交到数据库
-        sqlSession.commit();
-        sqlSession.close();
-    }
-
-    // 修改用户信息
-    @Test
-    public void updataUser() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
-        final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        final User user = userMapper.selectUserById(4);
-        user.setName("张聪辉name");
-        user.setPwd("6666666");
-        final int i = userMapper.updateUser(user);
-
-        sqlSession.commit();
-        sqlSession.close();
-    }
-
-    // 删除用户信息
-    @Test
-    public void deleteUser() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
-        final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        final int i = userMapper.deleteUser(0);
-
         sqlSession.commit();
         sqlSession.close();
     }
