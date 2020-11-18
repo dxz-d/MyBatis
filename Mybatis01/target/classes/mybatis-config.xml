@@ -24,5 +24,8 @@
     </environments>
     <mappers>
         <mapper resource="com/kuang/mapper/UserMapper.xml"/>
+
+        <!--<mapper class="com.kuang.mapper.UserMapper"/>-->
     </mappers>
+
 </configuration>

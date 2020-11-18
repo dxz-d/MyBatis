@@ -20,6 +20,18 @@ public class UserMapperTest {
     static Logger logger = Logger.getLogger(String.valueOf(UserMapperTest.class));
 
     @Test
+    public void selectUser() {
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        final List<User> userList = userMapper.selectUserByReflect();
+        for (User user : userList) {
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
+
+    @Test
     public void rowBounds() {
 
         final SqlSession sqlSession = MybatisUntils.getSession();
@@ -30,7 +42,9 @@ public class UserMapperTest {
         final RowBounds rowBounds = new RowBounds((currentPage - 1) * pageSize, pageSize);
         final List<User> userList = sqlSession.selectList("com.kuang.mapper.UserMapper.getUserRowBounds", null, rowBounds);
 
-        System.out.println(userList);
+        for (User user : userList) {
+            System.out.println(user);
+        }
 
         sqlSession.close();
 

@@ -2,6 +2,7 @@ package com.kuang.mapper;
 
 import com.kuang.pojo.User;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,14 @@ import java.util.Map;
  * @return
  */
 public interface UserMapper {
+
+    /**
+     * 反射查询用户
+     *
+     * @return
+     */
+    @Select("select * from user")
+    List<User> selectUserByReflect();
 
     /**
      * RowBounds实现分页
