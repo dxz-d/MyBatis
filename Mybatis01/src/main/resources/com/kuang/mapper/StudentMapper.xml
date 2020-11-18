@@ -4,4 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kuang.mapper.StudentMapper">
 
+    <!--
+        思路：
+            1.查询所有的学生信息
+            2.根据查询出学生的tid，寻找对应的老师   子查询
+
+    -->
+    <select id="getStudent" resultMap="StudentTeacher">
+        select * from student
+    </select>
+
+    <resultMap id="StudentTeacher" type="com.kuang.pojo.Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="tid" column="tid"/>
+        <!-- 复杂的属性，我们需要单独处理  对象：association   集合：collection -->
+        <association property="teacher" column="tid" javaType="com.kuang.pojo.Teacher" select="getTeacher"/>
+    </resultMap>
+
+    <select id="getTeacher" resultType="com.kuang.pojo.Teacher">
+        select * from teacher where id = #{tid}
+    </select>
 </mapper>

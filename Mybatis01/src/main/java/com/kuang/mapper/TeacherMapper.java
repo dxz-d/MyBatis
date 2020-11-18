@@ -11,6 +11,13 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface TeacherMapper {
 
-    @Select("select * from teacher where id = #{tid}")
+    /**
+     * 查询老师
+     * @param id
+     * @return
+     */
+    /**
+     * @Select("select * from teacher where id = #{tid}")
+     */
     Teacher getTeacher(@Param("tid") Integer id);
 }
