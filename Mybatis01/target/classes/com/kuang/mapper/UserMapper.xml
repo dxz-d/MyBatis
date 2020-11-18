@@ -4,8 +4,52 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 全限定名：绑定一个对应的Mapper接口 -->
 <mapper namespace="com.kuang.mapper.UserMapper">
+
+    <select id="getUserRowBounds" resultType="com.kuang.pojo.User">
+        select * from user;
+    </select>
+
+    <select id="selectUser" parameterType="map" resultType="com.kuang.pojo.User">
+        select * from user limit #{startIndex}, #{pageSize}
+    </select>
+
     <!-- select查询语句  id代表UserDao接口中对应的方法名   resultType代表该方法的返回类型 -->
     <select id="getUserList" resultType="com.kuang.pojo.User">
         select * from user
     </select>
+
+    <select id="selectUserById" resultType="com.kuang.pojo.User">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="selectUserByNameAndPassword" resultType="com.kuang.pojo.User">
+        select * from user where name = #{name} and pwd = #{pwd}
+    </select>
+
+    <select id="selectUserByNameAndPasswordMap" resultType="com.kuang.pojo.User" parameterType="map">
+        select * from user where name = #{name} and pwd = #{pwd}
+    </select>
+
+    <insert id="addUser" parameterType="com.kuang.pojo.User">
+        insert into user values (#{id}, #{pwd}, #{name})
+    </insert>
+
+    <update id="updateUser" parameterType="com.kuang.pojo.User">
+        update user set name = #{name}, pwd = #{pwd} where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from user where id = #{id}
+    </delete>
+
+    <insert id="addUserMap" parameterType="map">
+        insert into user(id,name) values (#{id}, #{username})
+    </insert>
+
+    <select id="selectUserLike" resultType="com.kuang.pojo.User">
+        <!--select * from user where name like #{username}-->
+        select * from user where name like "%"#{username}"%"
+    </select>
+
+
 </mapper>

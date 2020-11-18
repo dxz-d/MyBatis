@@ -16,6 +16,21 @@ import java.util.Map;
 public interface UserMapper {
 
     /**
+     * RowBounds实现分页
+     *
+     * @return
+     */
+    List<User> getUserRowBounds();
+
+    /**
+     * 分页查询
+     *
+     * @param map
+     * @return
+     */
+    List<User> selectUser(Map<String, Integer> map);
+
+    /**
      * 查询全部用户
      *
      * @return

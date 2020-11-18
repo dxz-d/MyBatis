@@ -2,10 +2,12 @@ package com.kuang.mapper;
 
 import com.kuang.pojo.User;
 import com.kuang.utils.MybatisUntils;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import javax.sound.midi.Soundbank;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,39 @@ import java.util.Map;
 public class UserMapperTest {
 
     static Logger logger = Logger.getLogger(String.valueOf(UserMapperTest.class));
+
+    @Test
+    public void rowBounds() {
+
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        // 第二页
+        int currentPage = 0;
+        // 每页显示几个
+        int pageSize = 4;
+        final RowBounds rowBounds = new RowBounds((currentPage - 1) * pageSize, pageSize);
+        final List<User> userList = sqlSession.selectList("com.kuang.mapper.UserMapper.getUserRowBounds", null, rowBounds);
+
+        System.out.println(userList);
+
+        sqlSession.close();
+
+    }
+
+    @Test
+    public void limitSelectUser() {
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        final HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+        hashMap.put("startIndex", 0);
+        hashMap.put("pageSize", 3);
+        final List<User> userList = userMapper.selectUser(hashMap);
+
+        for (User user : userList) {
+            System.out.println(user);
+        }
+
+        sqlSession.close();
+    }
 
     @Test
     public void log4j() {
