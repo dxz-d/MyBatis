@@ -30,9 +30,9 @@
         select * from user where name = #{name} and pwd = #{pwd}
     </select>
 
-    <insert id="addUser" parameterType="com.kuang.pojo.User">
+    <!--<insert id="addUser" parameterType="com.kuang.pojo.User">
         insert into user values (#{id}, #{pwd}, #{name})
-    </insert>
+    </insert>-->
 
     <update id="updateUser" parameterType="com.kuang.pojo.User">
         update user set name = #{name}, pwd = #{pwd} where id = #{id}

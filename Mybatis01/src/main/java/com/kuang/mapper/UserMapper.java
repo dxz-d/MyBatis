@@ -1,6 +1,7 @@
 package com.kuang.mapper;
 
 import com.kuang.pojo.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -79,6 +80,7 @@ public interface UserMapper {
      * @param user
      * @return
      */
+    @Insert("insert into user values (#{id}, #{pwd}, #{name})")
     int addUser(User user);
 
     /**

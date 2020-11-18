@@ -33,7 +33,8 @@ public class MybatisUntils {
     // SqlSession完全包含了面向数据库执行sql命令所需的所有方法
     // 获取sqlSession连接
     public static SqlSession getSession() {
-        return sqlSessionFactory.openSession();
+        // 设置提交事务
+        return sqlSessionFactory.openSession(true);
     }
 
 

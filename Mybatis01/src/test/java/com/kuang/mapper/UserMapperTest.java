@@ -128,13 +128,13 @@ public class UserMapperTest {
     public void addUser() {
         final SqlSession sqlSession = MybatisUntils.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        final User user = new User(4, "张聪辉", "666");
+        final User user = new User(8, "临汾", "666");
         final int i = userMapper.addUser(user);
 
         System.out.println("给数据库增加一个用户:" + i);
 
         // 提交事务，重点！不写的话不会提交到数据库
-        sqlSession.commit();
+        /*sqlSession.commit();*/
         sqlSession.close();
     }
 
