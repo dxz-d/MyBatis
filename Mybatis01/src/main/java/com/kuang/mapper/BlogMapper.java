@@ -21,10 +21,18 @@ public interface BlogMapper {
     int addBlog(Blog blog);
 
     /**
-     * 动态sql之if语句
+     * 动态sql之if标签
      *
      * @param map
      * @return
      */
     List<Blog> queryBlogIf(Map map);
+
+    /**
+     * 动态sql之set标签
+     *
+     * @param map
+     * @return
+     */
+    int updateBlog(Map map);
 }
