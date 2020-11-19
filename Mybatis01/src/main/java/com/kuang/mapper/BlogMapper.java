@@ -2,6 +2,9 @@ package com.kuang.mapper;
 
 import com.kuang.pojo.Blog;
 
+import java.util.List;
+import java.util.Map;
+
 /***
  * @description 博客的持久层
  * @author diaoxiuze
@@ -16,4 +19,12 @@ public interface BlogMapper {
      * @return
      */
     int addBlog(Blog blog);
+
+    /**
+     * 动态sql之if语句
+     *
+     * @param map
+     * @return
+     */
+    List<Blog> queryBlogIf(Map map);
 }

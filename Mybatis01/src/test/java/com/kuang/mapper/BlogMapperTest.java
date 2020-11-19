@@ -3,10 +3,13 @@ package com.kuang.mapper;
 import com.kuang.pojo.Blog;
 import com.kuang.utils.IdUntil;
 import com.kuang.utils.MybatisUntil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /***
  * @description 博客持久层测试类
@@ -17,11 +20,12 @@ import java.util.Date;
  */
 public class BlogMapperTest {
 
+    static SqlSession sqlSession = MybatisUntil.getSession();
+    static BlogMapper blogMapper = sqlSession.getMapper(BlogMapper.class);
+
     @Test
     public void addBlog() {
-        final SqlSession sqlSession = MybatisUntil.getSession();
-        final BlogMapper blogMapper = sqlSession.getMapper(BlogMapper.class);
-        final Blog blog = new Blog();
+        Blog blog = new Blog();
         blog.setId(IdUntil.getId());
         blog.setTitle("Mybatis如此简单");
         blog.setAuthor("狂神说");
@@ -31,17 +35,27 @@ public class BlogMapperTest {
 
         blog.setId(IdUntil.getId());
         blog.setTitle("Java如此简单");
-        blog.getCreateTime(new Date());
         blogMapper.addBlog(blog);
 
         blog.setId(IdUntil.getId());
         blog.setTitle("Spring如此简单");
-        blog.getCreateTime(new Date());
         blogMapper.addBlog(blog);
 
         blog.setId(IdUntil.getId());
         blog.setTitle("微服务如此简单");
-        blog.getCreateTime(new Date());
         blogMapper.addBlog(blog);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void queryBlogIf() {
+        final HashMap<String, String> hashMap = new HashMap<String, String>();
+        // hashMap.put("title", "Mybatis如此简单");
+        hashMap.put("author", "狂神说");
+        final List<Blog> blogList = blogMapper.queryBlogIf(hashMap);
+        System.out.println(blogList);
+
+        sqlSession.close();
     }
 }
