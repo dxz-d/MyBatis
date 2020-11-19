@@ -80,7 +80,6 @@ public class CacheTest {
         final User user = userMapper.queryById(1);
         System.out.println(user);
 
-
         final HashMap hashMap = new HashMap();
         hashMap.put("name", "王帅帅");
         hashMap.put("id", 4);
@@ -93,4 +92,22 @@ public class CacheTest {
         sqlSession.close();
     }
 
+    /**
+     * sqlSession相同，手动清除一级缓存
+     */
+    @Test
+    public void clearCache() {
+        final User user = userMapper.queryById(1);
+        System.out.println(user);
+
+        // sqlSession手动清除一级缓存
+        sqlSession.clearCache();
+
+        final User user1 = userMapper.queryById(1);
+        System.out.println(user1);
+
+        System.out.println(user == user1);
+
+        sqlSession.close();
+    }
 }

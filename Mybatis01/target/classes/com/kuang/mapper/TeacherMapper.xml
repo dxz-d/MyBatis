@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuang.mapper.TeacherMapper">
+
+    <!--
+        思路：
+            1.从学生表和老师表中查询学生id，学生姓名，老师姓名
+            2.对查询出来的结果做结果集映射
+                （1）.集合的话，使用collection!
+                    JavaType和ofType都是用来指定对象类型的
+                    JavaType是用来执行pojo类中属性的类型
+                    oftype指定的是映射道list集合属性中pojo类的类型
+    -->
+
+    <select id="getTeacher" resultMap="TeacherStudent">
+        select s.id sid, s.name sname , t.name tname, t.id tid
+        from student s,teacher t
+        where s.tid = t.id and t.id=#{id}
+    </select>
+    <resultMap id="TeacherStudent" type="com.kuang.pojo.Teacher">
+        <result property="name" column="tid"/>
+        <collection property="studentList" ofType="com.kuang.pojo.Student">
+            <result property="id" column="sid"/>
+            <result property="name" column="sname"/>
+            <result property="tid" column="tid"/>
+        </collection>
+    </resultMap>
+
+    <select id="getTeacher01" resultMap="TeacherStudent01">
+        select * from teacher where id = #{id}
+    </select>
+    <resultMap id="TeacherStudent01" type="com.kuang.pojo.Teacher">
+        <!-- column是一对多的外键，写的是一的主键的列名 -->
+        <collection property="studentList" javaType="arraylist" ofType="com.kuang.pojo.Student"
+                    column="id" select="getStudentByTeacherId"/>
+    </resultMap>
+    <select id="getStudentByTeacherId" resultType="com.kuang.pojo.Student">
+        select * from student where tid = #{id}
+    </select>
+</mapper>

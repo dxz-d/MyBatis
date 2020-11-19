@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuang.mapper.BlogMapper">
+
+    <insert id="addBlog">
+        insert into blog (id, title, author, create_time, views)
+        values (#{id}, #{title}, #{author}, #{createTime}, #{views});
+    </insert>
+
+    <!--
+        根据作者名字和博客名字来查询博客
+            如果作者名字为空，那么只根据博客名字查询
+            反之，则根据作者名查询
+     -->
+    <select id="queryBlogIf" resultType="com.kuang.pojo.Blog">
+        select * from blog
+        <where>
+            <!--<if test="title != null ">
+                title = #{title}
+            </if>
+            <if test="author != null ">
+                and author = #{author}
+            </if>-->
+
+            <!-- 引入sql片段 -->
+
+        </where>
+    </select>
+
+    <update id="updateBlog">
+        update blog
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="author != null">
+                author = #{author}
+            </if>
+        </set>
+        where id = #{id};
+    </update>
+
+
+    <select id="queryBlogChoose" resultType="com.kuang.pojo.Blog">
+        select * from blog
+        <where>
+            <choose>
+                <when test="title != null">
+                    title = #{title}
+                </when>
+                <when test="author != null">
+                    and author = #{author}
+                </when>
+                <otherwise>
+                    other views = #{views}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <sql id="if-title-author">
+        <if test="title != null ">
+            title = #{title}
+        </if>
+        <if test="author != null ">
+            and author = #{author}
+        </if>
+    </sql>
+
+    <select id="queryBlogForeach" resultType="com.kuang.pojo.Blog">
+        select * from blog
+        <where>
+            <!--
+                collection:指定输入对象中的集合属性
+                item：每次遍历生成的对象
+                open：开始遍历时的拼接字符串
+                close：结束时拼接的字符串
+                separator：遍历对象之间需要拼接的字符串
+                select * from blog where 1 = 1 and (id = 1 or id = 2 or id =3)
+            -->
+            <foreach collection="idsq" item="id" open="and (" close=")" separator="or">
+                id = #{id}
+            </foreach>
+
+        </where>
+    </select>
+</mapper>
