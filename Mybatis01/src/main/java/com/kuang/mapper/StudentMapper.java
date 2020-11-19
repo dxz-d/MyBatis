@@ -15,8 +15,17 @@ public interface StudentMapper {
 
     /**
      * 查询所有的学生信息，以及对应的老师信息
+     * 1.按照查询进行嵌套处理就像sql的子查询
      *
      * @return
      */
     List<Student> getStudent();
+
+    /**
+     * 查询所有的学生信息，以及对应的老师信息
+     * 2.按照结果进行嵌套处理就像sql表中的关联查询
+     *
+     * @return
+     */
+    List<Student> getStudent01();
 }

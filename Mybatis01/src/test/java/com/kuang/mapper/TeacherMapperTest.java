@@ -15,14 +15,32 @@ import org.junit.Test;
  */
 public class TeacherMapperTest {
 
-    Logger logger = Logger.getLogger(String.valueOf(TeacherMapperTest.class));
+    @Test
+    public void getTeacherAnnotation() {
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        final TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
+        final Teacher teacher = teacherMapper.getTeacherAnnotation(1);
+        System.out.println(teacher);
+
+        sqlSession.close();
+    }
 
     @Test
     public void getTeacher() {
         final SqlSession sqlSession = MybatisUntils.getSession();
         final TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
         final Teacher teacher = teacherMapper.getTeacher(1);
-        System.out.println(teacher);
+        System.out.println("老师的名字：" + teacher.getName() + ",学生的名字：" + teacher.getStudentList());
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void getTeacher01() {
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        final TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
+        final Teacher teacher = teacherMapper.getTeacher01(1);
+        System.out.println("老师的名字：" + teacher.getName() + ",学生的名字：" + teacher.getStudentList());
 
         sqlSession.close();
     }

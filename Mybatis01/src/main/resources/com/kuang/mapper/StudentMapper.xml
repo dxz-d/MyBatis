@@ -8,7 +8,6 @@
         思路：
             1.查询所有的学生信息
             2.根据查询出学生的tid，寻找对应的老师   子查询
-
     -->
     <select id="getStudent" resultMap="StudentTeacher">
         select * from student
@@ -25,4 +24,18 @@
     <select id="getTeacher" resultType="com.kuang.pojo.Teacher">
         select * from teacher where id = #{tid}
     </select>
+
+    <!-- 按结果嵌套处理-->
+    <resultMap id="StudentTeacher01" type="com.kuang.pojo.Student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="com.kuang.pojo.Teacher">
+            <result property="name" column="tname"/>
+        </association>
+    </resultMap>
+    <select id="getStudent01" resultMap="StudentTeacher01">
+        select s.id sid,s.name sname,t.name tname from student s,teacher t where t.id = s.id
+    </select>
+
+
 </mapper>

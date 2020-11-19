@@ -6,8 +6,8 @@
 
     <settings>
         <!-- 标准的日志工厂实现 -->
-        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
-        <setting name="logImpl" value="LOG4J"/>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--<setting name="logImpl" value="LOG4J"/>-->
     </settings>
 
     <environments default="development">

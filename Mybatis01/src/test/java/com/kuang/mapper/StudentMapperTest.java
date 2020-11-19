@@ -20,6 +20,18 @@ public class StudentMapperTest {
         final StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
         final List<Student> studentList = studentMapper.getStudent();
         for (Student student : studentList) {
+            System.out.println("学生名：" + student.getName() + ",老师名：" + student.getTeacher().getName());
+        }
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void getStudent01() {
+        final SqlSession sqlSession = MybatisUntils.getSession();
+        final StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
+        final List<Student> studentList = studentMapper.getStudent01();
+        for (Student student : studentList) {
             System.out.println(student);
         }
 
