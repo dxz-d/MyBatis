@@ -16,12 +16,13 @@
      -->
     <select id="queryBlogIf" resultType="com.kuang.pojo.Blog">
         select * from blog
-        where
-        <if test="title != null ">
-            title = #{title}
-        </if>
-        <if test="author != null ">
-            and author = #{author}
-        </if>
+        <where>
+            <if test="title != null ">
+                title = #{title}
+            </if>
+            <if test="author != null ">
+                and author = #{author}
+            </if>
+        </where>
     </select>
 </mapper>
