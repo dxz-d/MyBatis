@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,14 @@ import java.util.Map;
  * @return
  */
 public interface UserMapper {
+
+    /**
+     * 修改用户
+     *
+     * @param id
+     * @return
+     */
+    int updateUserById(Map map);
 
     /**
      * 根据id查询用户(测试缓存)

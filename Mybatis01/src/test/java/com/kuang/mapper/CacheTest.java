@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
 import javax.sound.midi.Soundbank;
+import java.util.HashMap;
+import java.util.Map;
 
 /***
  * @description Mybatis缓存测试
@@ -70,5 +72,25 @@ public class CacheTest {
         sqlSession.close();
     }
 
+    /**
+     * sqlSession相同，中间执行增删改操作
+     */
+    @Test
+    public void middleAdu() {
+        final User user = userMapper.queryById(1);
+        System.out.println(user);
+
+
+        final HashMap hashMap = new HashMap();
+        hashMap.put("name", "王帅帅");
+        hashMap.put("id", 4);
+        userMapper.updateUserById(hashMap);
+
+        User user1 = userMapper.queryById(1);
+        System.out.println(user1);
+
+        System.out.println(user == user1);
+        sqlSession.close();
+    }
 
 }
