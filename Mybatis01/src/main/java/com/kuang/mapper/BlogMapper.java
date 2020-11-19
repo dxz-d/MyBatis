@@ -28,7 +28,6 @@ public interface BlogMapper {
 
     /**
      * 动态sql之set标签
-     *
      * @param map
      * @return
      */
@@ -41,4 +40,12 @@ public interface BlogMapper {
      * @return
      */
     List<Blog> queryBlogChoose(Map map);
+
+    /**
+     * 动态sql之foreach标签
+     *
+     * @param map
+     * @return
+     */
+    List<Blog> queryBlogForeach(Map map);
 }

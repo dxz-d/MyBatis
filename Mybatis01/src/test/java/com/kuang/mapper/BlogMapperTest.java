@@ -7,9 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /***
  * @description 博客持久层测试类
@@ -76,6 +74,21 @@ public class BlogMapperTest {
         hashMap.put("title", "动态SQL1");
         hashMap.put("author", "秦疆1");
         blogMapper.queryBlogChoose(hashMap);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void queryBlogForeach() {
+        final HashMap hashMap = new HashMap();
+        final ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        arrayList.add(1);
+        arrayList.add(2);
+        arrayList.add(3);
+
+        hashMap.put("idsq", arrayList);
+        final List<Blog> blogList = blogMapper.queryBlogForeach(hashMap);
+        System.out.println(blogList);
 
         sqlSession.close();
     }
