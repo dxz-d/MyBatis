@@ -54,4 +54,21 @@ public class CacheTest {
     }
 
 
+    /**
+     * sqlSession相同，查询条件不同
+     * 当前结果中，不存在这条数据
+     */
+    @Test
+    public void sqlSessionByDifferent() {
+        final User user = userMapper.queryById(1);
+        System.out.println(user);
+
+        User user1 = userMapper.queryById(2);
+        System.out.println(user1);
+
+        System.out.println(user == user1);
+        sqlSession.close();
+    }
+
+
 }
