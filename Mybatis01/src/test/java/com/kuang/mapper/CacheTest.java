@@ -110,4 +110,24 @@ public class CacheTest {
 
         sqlSession.close();
     }
+
+    /**
+     * 二级缓存
+     */
+    @Test
+    public void twoCache() {
+        final SqlSession sqlSession1 = MybatisUntil.getSession();
+        final SqlSession sqlSession2 = MybatisUntil.getSession();
+
+        final UserMapper userMapper1 = sqlSession1.getMapper(UserMapper.class);
+        final UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
+
+        final User user1 = userMapper1.queryById(1);
+        System.out.println(user1);
+        sqlSession1.close();
+
+        final User user2 = userMapper2.queryById(1);
+        System.out.println(user2);
+        sqlSession2.close();
+    }
 }

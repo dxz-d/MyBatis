@@ -21,7 +21,7 @@ public interface UserMapper {
     /**
      * 修改用户
      *
-     * @param id
+     * @param map
      * @return
      */
     int updateUserById(Map map);

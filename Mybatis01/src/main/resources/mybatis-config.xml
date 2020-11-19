@@ -4,10 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+
+    <properties resource="db.properties">
+
+    </properties>
+
     <settings>
         <!-- 标准的日志工厂实现 -->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
         <!--<setting name="logImpl" value="LOG4J"/>-->
+        <!-- 开启全局缓存 -->
+        <setting name="cacheEnabled" value="true"/>
     </settings>
 
     <environments default="development">

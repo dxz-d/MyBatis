@@ -5,6 +5,10 @@
 <!-- 全限定名：绑定一个对应的Mapper接口 -->
 <mapper namespace="com.kuang.mapper.UserMapper">
 
+    <!-- 添加二级缓存 -->
+    <!--<cache></cache>-->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+
     <select id="getUserRowBounds" resultType="com.kuang.pojo.User">
         select * from user;
     </select>
