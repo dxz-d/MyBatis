@@ -52,4 +52,6 @@ public class CacheTest {
         sqlSession1.close();
         sqlSession2.close();
     }
+
+
 }
