@@ -17,12 +17,15 @@
     <select id="queryBlogIf" resultType="com.kuang.pojo.Blog">
         select * from blog
         <where>
-            <if test="title != null ">
+            <!--<if test="title != null ">
                 title = #{title}
             </if>
             <if test="author != null ">
                 and author = #{author}
-            </if>
+            </if>-->
+
+            <!-- 引入sql片段 -->
+
         </where>
     </select>
 
@@ -56,4 +59,13 @@
             </choose>
         </where>
     </select>
+
+    <sql id="if-title-author">
+        <if test="title != null ">
+            title = #{title}
+        </if>
+        <if test="author != null ">
+            and author = #{author}
+        </if>
+    </sql>
 </mapper>

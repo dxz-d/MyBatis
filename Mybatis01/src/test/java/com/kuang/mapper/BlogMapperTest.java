@@ -51,7 +51,7 @@ public class BlogMapperTest {
     @Test
     public void queryBlogIf() {
         final HashMap<String, String> hashMap = new HashMap<String, String>();
-        // hashMap.put("title", "Mybatis如此简单");
+        hashMap.put("title", "Java如此简单");
         hashMap.put("author", "狂神说");
         final List<Blog> blogList = blogMapper.queryBlogIf(hashMap);
         System.out.println(blogList);
