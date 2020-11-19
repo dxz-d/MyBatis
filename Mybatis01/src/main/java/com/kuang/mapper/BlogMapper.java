@@ -14,7 +14,6 @@ public interface BlogMapper {
 
     /**
      * 新增一个博客
-     *
      * @param blog
      * @return
      */
@@ -22,7 +21,6 @@ public interface BlogMapper {
 
     /**
      * 动态sql之if标签
-     *
      * @param map
      * @return
      */
@@ -35,4 +33,12 @@ public interface BlogMapper {
      * @return
      */
     int updateBlog(Map map);
+
+    /**
+     * 动态sql之choose标签
+     *
+     * @param map
+     * @return
+     */
+    List<Blog> queryBlogChoose(Map map);
 }

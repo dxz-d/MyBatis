@@ -62,12 +62,20 @@ public class BlogMapperTest {
     @Test
     public void updateBlog() {
         final HashMap<String, String> hashMap = new HashMap<String, String>();
-
         hashMap.put("id", "64df8e526b794f76b2d0d74cf23ad886");
         hashMap.put("title", "动态SQL1");
         hashMap.put("author", "秦疆1");
-
         blogMapper.updateBlog(hashMap);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void queryBlogChoose() {
+        final HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("title", "动态SQL1");
+        hashMap.put("author", "秦疆1");
+        blogMapper.queryBlogChoose(hashMap);
 
         sqlSession.close();
     }
