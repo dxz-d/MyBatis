@@ -51,5 +51,9 @@
         select * from user where name like "%"#{username}"%"
     </select>
 
+    <select id="queryById" resultType="com.kuang.pojo.User">
+        select * from user where id = #{id};
+    </select>
+
 
 </mapper>

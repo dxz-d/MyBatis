@@ -18,6 +18,14 @@ import java.util.Map;
 public interface UserMapper {
 
     /**
+     * 根据id查询用户(测试缓存)
+     *
+     * @param id
+     * @return
+     */
+    User queryById(@Param("id") int id);
+
+    /**
      * 反射查询用户
      *
      * @return
