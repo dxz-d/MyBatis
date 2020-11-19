@@ -1,7 +1,7 @@
 package com.kuang.mapper;
 
 import com.kuang.pojo.Student;
-import com.kuang.utils.MybatisUntils;
+import com.kuang.utils.MybatisUntil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class StudentMapperTest {
 
     @Test
     public void getStudent() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
         final List<Student> studentList = studentMapper.getStudent();
         for (Student student : studentList) {
@@ -28,7 +28,7 @@ public class StudentMapperTest {
 
     @Test
     public void getStudent01() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final StudentMapper studentMapper = sqlSession.getMapper(StudentMapper.class);
         final List<Student> studentList = studentMapper.getStudent01();
         for (Student student : studentList) {

@@ -23,6 +23,7 @@
         </environment>
     </environments>
     <mappers>
+        <mapper resource="com/kuang/mapper/BlogMapper.xml"/>
         <mapper resource="com/kuang/mapper/StudentMapper.xml"/>
         <mapper resource="com/kuang/mapper/TeacherMapper.xml"/>
         <mapper class="com.kuang.mapper.UserMapper"/>

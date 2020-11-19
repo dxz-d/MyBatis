@@ -1,13 +1,12 @@
 package com.kuang.mapper;
 
 import com.kuang.pojo.User;
-import com.kuang.utils.MybatisUntils;
+import com.kuang.utils.MybatisUntil;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
-import javax.sound.midi.Soundbank;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,7 @@ public class UserMapperTest {
 
     @Test
     public void selectUser() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         final List<User> userList = userMapper.selectUserByReflect();
         for (User user : userList) {
@@ -34,7 +33,7 @@ public class UserMapperTest {
     @Test
     public void rowBounds() {
 
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         // 第二页
         int currentPage = 0;
         // 每页显示几个
@@ -52,7 +51,7 @@ public class UserMapperTest {
 
     @Test
     public void limitSelectUser() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         final HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
         hashMap.put("startIndex", 0);
@@ -78,7 +77,7 @@ public class UserMapperTest {
     public void test() {
 
         // 第一步：获得SqlSessionFactory对象
-        SqlSession sqlSession = MybatisUntils.getSession();
+        SqlSession sqlSession = MybatisUntil.getSession();
 
         // 方式一：getMapper
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
@@ -99,7 +98,7 @@ public class UserMapperTest {
     // 通过密码和名字查询用户(方式一：通过参数传递)
     @Test
     public void selectUserByNameAndPassword() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         final User user = userMapper.selectUserByNameAndPassword("张三", "abcdef");
 
@@ -111,7 +110,7 @@ public class UserMapperTest {
     // 通过密码和名字查询用户(方式二：Map传值)
     @Test
     public void selectUserByNameAndPasswordMap() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", "狂神");
@@ -126,7 +125,7 @@ public class UserMapperTest {
     // 给数据库增加一个用户
     @Test
     public void addUser() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         final User user = new User(8, "临汾", "666");
         final int i = userMapper.addUser(user);
@@ -140,7 +139,7 @@ public class UserMapperTest {
 
     @Test
     public void addUserMap() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         final Map<String, Object> map = new HashMap<String, Object>();
         map.put("id", 5);
@@ -154,7 +153,7 @@ public class UserMapperTest {
     // 模糊查询用户信息
     @Test
     public void selectUserLike() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         // final List<User> userList = userMapper.selectUserLike("%刁%");
 

@@ -14,7 +14,7 @@ import java.io.InputStream;
  * @author diaoxiuze
  * @date 2020/11/16 11:13
  */
-public class MybatisUntils {
+public class MybatisUntil {
 
     private static SqlSessionFactory sqlSessionFactory;
 

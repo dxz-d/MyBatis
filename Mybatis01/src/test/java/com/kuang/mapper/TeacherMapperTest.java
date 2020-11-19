@@ -1,9 +1,8 @@
 package com.kuang.mapper;
 
 import com.kuang.pojo.Teacher;
-import com.kuang.utils.MybatisUntils;
+import com.kuang.utils.MybatisUntil;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 
 /***
@@ -17,7 +16,7 @@ public class TeacherMapperTest {
 
     @Test
     public void getTeacherAnnotation() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
         final Teacher teacher = teacherMapper.getTeacherAnnotation(1);
         System.out.println(teacher);
@@ -27,7 +26,7 @@ public class TeacherMapperTest {
 
     @Test
     public void getTeacher() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
         final Teacher teacher = teacherMapper.getTeacher(1);
         System.out.println("老师的名字：" + teacher.getName() + ",学生的名字：" + teacher.getStudentList());
@@ -37,7 +36,7 @@ public class TeacherMapperTest {
 
     @Test
     public void getTeacher01() {
-        final SqlSession sqlSession = MybatisUntils.getSession();
+        final SqlSession sqlSession = MybatisUntil.getSession();
         final TeacherMapper teacherMapper = sqlSession.getMapper(TeacherMapper.class);
         final Teacher teacher = teacherMapper.getTeacher01(1);
         System.out.println("老师的名字：" + teacher.getName() + ",学生的名字：" + teacher.getStudentList());
