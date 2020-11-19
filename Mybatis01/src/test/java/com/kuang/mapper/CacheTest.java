@@ -5,6 +5,8 @@ import com.kuang.utils.MybatisUntil;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import javax.sound.midi.Soundbank;
+
 /***
  * @description Mybatis缓存测试
  * @author diaoxiuze
@@ -27,5 +29,27 @@ public class CacheTest {
 
         System.out.println(user == user1);
         sqlSession.close();
+    }
+
+    /**
+     * 每个sqlSession中的缓存相对独立
+     * sqlSession相同
+     */
+    @Test
+    public void sqlSession() {
+        final SqlSession sqlSession1 = MybatisUntil.getSession();
+        final UserMapper userMapper1 = sqlSession1.getMapper(UserMapper.class);
+        final User user1 = userMapper1.queryById(1);
+        System.out.println(user1);
+
+        final SqlSession sqlSession2 = MybatisUntil.getSession();
+        final UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
+        final User user2 = userMapper2.queryById(1);
+        System.out.println(user2);
+
+        System.out.println(user1 == user2);
+
+        sqlSession1.close();
+        sqlSession2.close();
     }
 }
